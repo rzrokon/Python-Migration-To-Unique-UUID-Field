@@ -24,3 +24,33 @@ class Movie(models.Model):
     def __str__(self):
         return '%s - %s' % (self.name, self.year)
 
+class Category(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title
+
+
+class Author(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, null=True)
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
+    email = models.CharField(max_length=50)
+    website = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    cover = models.ImageField(null=True)
+    category = models.ManyToManyField(Category, blank=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+
+
