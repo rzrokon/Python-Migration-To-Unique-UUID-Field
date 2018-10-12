@@ -33,6 +33,8 @@ class Category(models.Model):
 
 
 class Author(models.Model):
+    id = models.UUIDField(default=uuid.uuid4,  unique=True, primary_key=True)
+    # uuid=models.UUIDField(default=uuid.uuid4, blank=True)
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=50)
